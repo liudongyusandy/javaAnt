@@ -1,0 +1,9 @@
+*.class
+
+# Package Files #
+*.war
+*.ear
+.project
+.settings
+.idea
+java-junit-template-project.iml
