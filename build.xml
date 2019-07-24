@@ -9,9 +9,7 @@
 
     <property name="result.report.dir" location="${result.dir}/site/jacoco"/>
     <property name="result.exec.file" location="${result.dir}/jacoco.exec"/>
-    <property name="junit.output.dir" location="${result.dir}/junit-report"/>
 
-    <property name="findbugs.output.dir" location="${result.dir}/findbugs-report"/>
     <property name="findbugs.home" location="lib/findbugs"/><!-- 需要配置: findbugs的安装路径 -->
 
     <!--  Step 1: Import JaCoCo Ant tasks
@@ -53,10 +51,9 @@
         out: 输出格式，默认xml
         outputFile: 报告路径
         -->
-        <mkdir dir="${findbugs.output.dir}"/>
         <findbugs home="${findbugs.home}"
                   output="xml"
-                  outputFile="${findbugs.output.dir}/findbugs.xml"
+                  outputFile="${result.report.dir}/findbugs.xml"
                   reportlevel="low" >
             <!-- auxClasspath: 【可选】需要使用，但不需要扫描的类 -->
             <!--<auxClasspath path="${basedir}/lib/Regex.jar" />-->
@@ -77,7 +74,6 @@
         <!--
          Step 2: Wrap test execution with the JaCoCo coverage task
         -->
-        <mkdir dir="${junit.output.dir}"/>
         <jacoco:coverage destfile="${result.exec.file}">
             <junit printsummary="yes" haltonfailure="no" fork="true" forkmode="once">
                 <classpath>
@@ -85,7 +81,7 @@
                     <pathelement location="${test.build.dir}"/>
                 </classpath>
                 <formatter type="xml"/>
-                <batchtest todir="${junit.output.dir}">
+                <batchtest todir="${result.report.dir}">
                     <fileset dir="${test.src.dir}" includes="**/*Test.java"/>
                 </batchtest>
             </junit>
