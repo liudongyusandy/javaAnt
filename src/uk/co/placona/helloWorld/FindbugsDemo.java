@@ -9,8 +9,14 @@ public class FindbugsDemo {
 
         Bug bug = null;
         System.out.println(bug.report());
-        Bug bug2 = null;
-        System.out.println(bug2.report());
+
+        }
+
+    public static Bug getBug(boolean flag){
+//        if (flag) {
+//            return new Bug();
+//        }
+        return null;
     }
 
     public static class Bug{
