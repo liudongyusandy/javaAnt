@@ -1,5 +1,10 @@
 <?xml version="1.0"?>
 <project name="java-junit-template-project" default="test" basedir="." xmlns:jacoco="antlib:org.jacoco.ant">
+
+    <property name="target" value="1.8"/>
+    <property name="source" value="1.8"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+
     <property name="main.src.dir" location="./src"/><!-- 需要配置 -->
     <property name="test.src.dir" location="./test"/><!-- 需要配置 -->
     <property name="result.dir" location="./target"/>
@@ -9,7 +14,7 @@
 
     <property name="result.report.dir" location="${result.dir}/site/jacoco"/>
     <property name="result.exec.file" location="${result.dir}/jacoco.exec"/>
-    <property name="junit.output.dir" location="${result.dir}/junit-report"/>
+    <property name="junit.output.dir" location="${result.dir}/site/jacoco"/>
 
     <property name="findbugs.output.dir" location="${result.dir}/findbugs-report"/>
     <property name="findbugs.home" location="lib/findbugs"/><!-- 需要配置: findbugs的安装路径 -->
@@ -42,7 +47,9 @@
 
     <target name="compile" depends="clean">
         <mkdir dir="${main.build.dir}"/>
-        <javac srcdir="${main.src.dir}" destdir="${main.build.dir}" debug="true" includeantruntime="false">
+        <javac srcdir="${main.src.dir}" destdir="${main.build.dir}"
+               debug="true" debuglevel="${debuglevel}" includeantruntime="false"
+               source="${source}" target="${target}" encoding="UTF-8">
             <classpath refid="classpath.base"/>
         </javac>
     </target>
@@ -111,8 +118,8 @@
             </structure>
             <!--  to produce reports in different formats.  -->
             <html destdir="${result.report.dir}"/>
-            <csv destfile="${result.report.dir}/report.csv"/>
-            <xml destfile="${result.report.dir}/report.xml"/>
+            <!--<csv destfile="${result.report.dir}/report.csv"/>-->
+            <!--<xml destfile="${result.report.dir}/report.xml"/>-->
         </jacoco:report>
     </target>
 
