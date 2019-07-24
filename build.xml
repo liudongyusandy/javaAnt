@@ -3,17 +3,27 @@
     <property name="main.src.dir" location="./src"/><!-- 需要配置 -->
     <property name="test.src.dir" location="./test"/><!-- 需要配置 -->
     <property name="result.dir" location="./target"/>
+
     <property name="main.build.dir" location="${result.dir}/classes/main"/>
     <property name="test.build.dir" location="${result.dir}/classes/test"/>
+
     <property name="result.report.dir" location="${result.dir}/site/jacoco"/>
     <property name="result.exec.file" location="${result.dir}/jacoco.exec"/>
-    <property name="junit.output.dir" location="${result.dir}/junitReport"/>
+    <property name="junit.output.dir" location="${result.dir}/junit-report"/>
+
+    <property name="findbugs.output.dir" location="${result.dir}/findbugs-report"/>
+    <property name="findbugs.home" location="lib/findbugs"/><!-- 需要配置: findbugs的安装路径 -->
 
     <!--  Step 1: Import JaCoCo Ant tasks
           如果ANT_HOME里面已经有这个jar包，则无需配置
     -->
     <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
         <classpath path="lib/jacocoant.jar"/>
+    </taskdef>
+
+    <!-- Import Findbugs Task -->
+    <taskdef name="findbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask">
+        <classpath path="${findbugs.home}/lib/findbugs-ant.jar"/>
     </taskdef>
 
     <target name="clean">
@@ -32,6 +42,7 @@
 
     <target name="init" depends="clean">
         <mkdir dir="${junit.output.dir}"/>
+        <mkdir dir="${findbugs.output.dir}"/>
     </target>
 
     <target name="compile" depends="init">
@@ -41,7 +52,24 @@
         </javac>
     </target>
 
-    <target name="test-compile" depends="compile">
+    <target name="findbugs" depends="compile">
+        <!--
+        home: findbugs安装路径，必填
+        out: 输出格式，默认xml
+        outputFile: 报告路径
+        -->
+        <findbugs home="${findbugs.home}"
+                  output="xml"
+                  outputFile="${findbugs.output.dir}/findbugs_report.xml" >
+            <!-- auxClasspath: 【可选】需要使用，但不需要扫描的类 -->
+            <!--<auxClasspath path="${basedir}/lib/Regex.jar" />-->
+            <!-- sourcePath: 【可选】源文件路径 -->
+            <!--<sourcePath path="${main.src.dir}" />-->
+            <class location="${main.build.dir}" />
+        </findbugs>
+    </target>
+
+    <target name="test-compile" depends="findbugs">
         <mkdir dir="${test.build.dir}"/>
         <javac srcdir="${test.src.dir}" destdir="${test.build.dir}" includeantruntime="false">
             <classpath refid="classpath.test"/>
@@ -90,13 +118,4 @@
         </jacoco:report>
     </target>
 
-    <target name="junitreport" depends="test">
-
-        <junitreport todir="${junit.output.dir}">
-            <fileset dir="${junit.output.dir}">
-                <include name="TEST-*.xml"/>
-            </fileset>
-            <report format="frames" todir="${junit.output.dir}"/>
-        </junitreport>
-    </target>
 </project>
