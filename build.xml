@@ -1,14 +1,16 @@
 <?xml version="1.0"?>
 <project name="java-junit-template-project" default="test" basedir="." xmlns:jacoco="antlib:org.jacoco.ant">
-    <property name="main.src.dir" location="./src"/>
-    <property name="test.src.dir" location="./test"/>
+    <property name="main.src.dir" location="./src"/><!-- 需要配置 -->
+    <property name="test.src.dir" location="./test"/><!-- 需要配置 -->
     <property name="result.dir" location="./target"/>
     <property name="main.build.dir" location="${result.dir}/classes/main"/>
     <property name="test.build.dir" location="${result.dir}/classes/test"/>
     <property name="result.report.dir" location="${result.dir}/site/jacoco"/>
     <property name="result.exec.file" location="${result.dir}/jacoco.exec"/>
 
-    <!--  Step 1: Import JaCoCo Ant tasks  -->
+    <!--  Step 1: Import JaCoCo Ant tasks
+          如果ANT_HOME里面已经有这个jar包，则无需配置
+    -->
     <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
         <classpath path="lib/jacocoant.jar"/>
     </taskdef>
@@ -21,10 +23,8 @@
     <path id="classpath.base"/>
 
     <path id="classpath.test">
-        <!-- 需要配置 -->
-        <pathelement location="lib/junit-4.12.jar"/>
-        <!-- 需要配置 -->
-        <pathelement location="lib/hamcrest-core-1.3.jar"/>
+        <pathelement location="lib/junit-4.12.jar"/><!-- 需要配置 -->
+        <pathelement location="lib/hamcrest-core-1.3.jar"/><!-- 需要配置 -->
         <pathelement location="${main.build.dir}"/>
         <path refid="classpath.base"/>
     </path>
