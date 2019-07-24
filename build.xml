@@ -56,7 +56,8 @@
         <mkdir dir="${findbugs.output.dir}"/>
         <findbugs home="${findbugs.home}"
                   output="xml"
-                  outputFile="${findbugs.output.dir}/findbugs_report.xml" >
+                  outputFile="${findbugs.output.dir}/findbugs_report.xml"
+                  reportlevel="low" >
             <!-- auxClasspath: 【可选】需要使用，但不需要扫描的类 -->
             <!--<auxClasspath path="${basedir}/lib/Regex.jar" />-->
             <!-- sourcePath: 【可选】源文件路径 -->
