@@ -9,12 +9,16 @@ public class FindbugsDemo {
 
         Bug bug = null;
         System.out.println(bug.report());
+        Bug bug2 = null;
+        System.out.println(bug2.report());
     }
 
     public static class Bug{
+        int singleQuote = 0;
+        int doubleQuote = 0;
 
-        String report(){
-            return "I'm a bug!";
+        boolean report(){
+            return singleQuote % 2 == 0 && doubleQuote % 2 == 0;
         }
     }
 }

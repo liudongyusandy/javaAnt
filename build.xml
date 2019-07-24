@@ -40,7 +40,7 @@
         <path refid="classpath.base"/>
     </path>
 
-    <target name="compile">
+    <target name="compile" depends="clean">
         <mkdir dir="${main.build.dir}"/>
         <javac srcdir="${main.src.dir}" destdir="${main.build.dir}" debug="true" includeantruntime="false">
             <classpath refid="classpath.base"/>
