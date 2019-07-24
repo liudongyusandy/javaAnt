@@ -6,7 +6,11 @@ package uk.co.placona.helloWorld;
 public class MathUtils {
 
     public static int add(int a, int b) {
-        return a + b;
+        if(a>0 && b>0){
+            return a + b;
+        }else {
+            return 0;
+        }
     }
 
     public static int minus(int a, int b) {
