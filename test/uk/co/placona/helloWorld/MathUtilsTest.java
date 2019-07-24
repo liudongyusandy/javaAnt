@@ -16,5 +16,6 @@ public class MathUtilsTest {
 
     @Test
     public void minus() {
+        assertEquals(2, MathUtils.minus(3,2));
     }
 }
