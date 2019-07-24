@@ -16,7 +16,7 @@
     <property name="result.exec.file" location="${result.dir}/jacoco.exec"/>
 
     <property name="findbugs.output.dir" location="${result.dir}/findbugs-report"/>
-    <property name="findbugs.home" location="lib/findbugs"/><!-- 需要配置: findbugs的安装路径 -->
+    <property name="findbugs.home" location="/usr/install/findbugs/"/><!-- 需要配置: findbugs的安装路径 -->
 
     <!--  Step 1: Import JaCoCo Ant tasks
           如果ANT_HOME里面已经有这个jar包，则无需配置
