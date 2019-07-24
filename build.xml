@@ -53,7 +53,7 @@
          Step 2: Wrap test execution with the JaCoCo coverage task
         -->
         <jacoco:coverage destfile="${result.exec.file}">
-            <junit printsummary="yes" haltonfailure="yes" fork="true" forkmode="once">
+            <junit printsummary="yes" haltonfailure="no" fork="true" forkmode="once">
                 <classpath>
                     <path refid="classpath.test"/>
                     <pathelement location="${test.build.dir}"/>
