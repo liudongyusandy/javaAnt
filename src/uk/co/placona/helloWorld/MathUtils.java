@@ -1,6 +1,8 @@
 package uk.co.placona.helloWorld;
 
 /**
+ * This is a util for junit test
+ *
  * @author Peter Yu 2019/7/23 17:19
  */
 public class MathUtils {
