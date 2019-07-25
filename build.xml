@@ -13,6 +13,7 @@
     <property name="test.build.dir" location="${result.dir}/classes/test"/>
 
     <property name="result.report.dir" location="${result.dir}/site/jacoco"/>
+    <property name="junit.report.dir" location="${result.dir}/junit-report"/>
     <property name="result.exec.file" location="${result.dir}/jacoco.exec"/>
 
     <property name="findbugs.output.dir" location="${result.dir}/findbugs-report"/>
@@ -86,7 +87,7 @@
         <!--
          Step 2: Wrap test execution with the JaCoCo coverage task
         -->
-        <mkdir dir="${result.report.dir}"/>
+        <mkdir dir="${junit.report.dir}"/>
         <jacoco:coverage destfile="${result.exec.file}">
             <junit printsummary="yes" haltonfailure="no" fork="true" forkmode="once">
                 <classpath>
@@ -94,7 +95,7 @@
                     <pathelement location="${test.build.dir}"/>
                 </classpath>
                 <formatter type="xml"/>
-                <batchtest todir="${result.report.dir}">
+                <batchtest todir="${junit.report.dir}">
                     <fileset dir="${test.src.dir}" includes="**/*Test.java"/>
                 </batchtest>
             </junit>
