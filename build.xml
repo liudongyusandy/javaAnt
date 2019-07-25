@@ -18,12 +18,12 @@
     <property name="findbugs.output.dir" location="${result.dir}/findbugs-report"/>
     <property name="findbugs.home" location="/usr/install/findbugs/"/><!-- 需要配置: findbugs的安装路径 -->
 
-    <!--  Step 1: Import JaCoCo Ant tasks
-          如果ANT_HOME里面已经有这个jar包，则无需配置
+    <!--  Import JaCoCo Ant tasks
+          选填: 如果ANT_HOME里面已经有这个jar包，则无需配置
     -->
-    <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+    <!--<taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
         <classpath path="lib/jacocoant.jar"/>
-    </taskdef>
+    </taskdef>-->
 
     <!-- Import Findbugs Task -->
     <taskdef name="findbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask">
@@ -53,13 +53,16 @@
         </javac>
     </target>
 
+    <!-- Run findbugs analysis -->
     <target name="findbugs" depends="compile">
         <!--
         home: findbugs安装路径，必填
         out: 输出格式，默认xml
         outputFile: 报告路径
+        reportlevel: 报告等级，分别有 high，medium（默认），low
         -->
         <mkdir dir="${findbugs.output.dir}"/>
+
         <findbugs home="${findbugs.home}"
                   output="xml"
                   outputFile="${findbugs.output.dir}/findbugs.xml"
@@ -98,6 +101,7 @@
         </jacoco:coverage>
     </target>
 
+    <!-- Generate report -->
     <target name="report" depends="test">
         <jacoco:report>
             <!--
