@@ -7,16 +7,16 @@
 
     <property name="main.src.dir" location="./src"/><!-- 需要配置: 源码路径 -->
     <property name="test.src.dir" location="./test"/><!-- 需要配置: 单测路径 -->
-    <property name="result.dir" location="./target"/>
+    <property name="result.dir" location="./target"/><!-- 默认: 编译文件存放路径-->
 
-    <property name="main.build.dir" location="${result.dir}/classes/main"/>
-    <property name="test.build.dir" location="${result.dir}/classes/test"/>
+    <property name="main.build.dir" location="${result.dir}/classes/main"/><!-- 默认: 源码class文件存放路径-->
+    <property name="test.build.dir" location="${result.dir}/classes/test"/><!-- 默认: 单测class文件存放路径-->
 
-    <property name="result.report.dir" location="${result.dir}/site/jacoco"/>
-    <property name="junit.report.dir" location="${result.dir}/junit-report"/>
-    <property name="result.exec.file" location="${result.dir}/jacoco.exec"/>
+    <property name="result.report.dir" location="${result.dir}/site/jacoco"/><!-- 默认: 覆盖率分析结果存放路径-->
+    <property name="junit.report.dir" location="${result.dir}/junit-report"/><!-- 默认: junit报告存放路径-->
+    <property name="result.exec.file" location="${result.dir}/jacoco.exec"/><!-- 默认: jacoco执行文件存放路径-->
 
-    <property name="findbugs.output.dir" location="${result.dir}/findbugs-report"/>
+    <property name="findbugs.output.dir" location="${result.dir}/findbugs-report"/><!-- 默认: findbugs报告存放路径-->
     <property name="findbugs.home" location="/usr/install/findbugs/"/><!-- 需要配置: findbugs的安装路径 -->
 
     <!--  Import JaCoCo Ant tasks
